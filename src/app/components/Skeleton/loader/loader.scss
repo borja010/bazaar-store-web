@@ -1,0 +1,88 @@
+.overlay {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 3200;
+    filter: alpha(opacity=65);
+    -moz-opacity: 65;
+    opacity: 0.65;
+    background: #e8e8e8;
+    height: 100%;
+    width: 100%;
+  
+    .loader {
+      margin: 0 auto;
+      width: 60px;
+      height: 50px;
+      text-align: center;
+      font-size: 10px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translateY(-50%) translateX(-50%);
+      transform: translateY(-50%) translateX(-50%);
+  
+      > div {
+        height: 100%;
+        width: 8px;
+        float: left;
+        margin-left: 2px;
+        -webkit-animation: delay 0.8s infinite ease-in-out;
+        animation: delay 0.8s infinite ease-in-out;
+      }
+  
+      .bar1 {
+        background-color: #000000;
+      }
+      .bar2 {
+        background-color: #303030;
+        -webkit-animation-delay: -0.7s;
+        animation-delay: -0.7s;
+      }
+      .bar3 {
+        background-color: #404040;
+        -webkit-animation-delay: -0.6s;
+        animation-delay: -0.6s;
+      }
+      .bar4 {
+        background-color: #696969;
+        -webkit-animation-delay: -0.5s;
+        animation-delay: -0.5s;
+      }
+      .bar5 {
+        background-color: #909090;
+        -webkit-animation-delay: -0.4s;
+        animation-delay: -0.4s;
+      }
+      .bar6 {
+        background-color: #b0b0b0;
+        -webkit-animation-delay: -0.3s;
+        animation-delay: -0.3s;
+      }
+    }
+  }
+  
+  @-webkit-keyframes delay {
+    0%,
+    40%,
+    100% {
+      -webkit-transform: scaleY(0.05);
+    }
+    20% {
+      -webkit-transform: scaleY(1);
+    }
+  }
+  
+  @keyframes delay {
+    0%,
+    40%,
+    100% {
+      transform: scaleY(0.05);
+      -webkit-transform: scaleY(0.05);
+    }
+    20% {
+      transform: scaleY(1);
+      -webkit-transform: scaleY(1);
+    }
+  }
+  
