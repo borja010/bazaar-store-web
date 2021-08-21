@@ -2,12 +2,14 @@ import React, { useContext, useEffect } from "react";
 
 import { useHistory } from "react-router-dom";
 
+import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Link from '@material-ui/core/Link';
 
 import { makeStyles } from "@material-ui/core/styles";
 
 import SocialNetworkNetwork from "app/components/Skeleton/socialNetwork/socialNetworkLogo";
+import FooterWrapper from "app/components/Skeleton/footerWrapper/footerWrapper";
 
 import facebook from "app/assets/images/social-networks/facebook.png"
 import whatsapp from "app/assets/images/social-networks/whatsapp.png"
@@ -19,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.primary.main,
     width: "100%"
+  },
+  ul: {
+
   }
 }));
 
@@ -81,18 +86,18 @@ function Footer() {
         <Grid container direction="row" justifyContent="center">
           <Grid item xs={4} />
           <Grid item xs={4}>
-            <SocialNetworkNetwork images={images} />
+            <FooterWrapper items={images}>
+              <SocialNetworkNetwork />
+            </FooterWrapper>
           </Grid>
           <Grid item xs={4} />
         </Grid>
         <Grid container direction="row" justifyContent="center">
           <Grid item xs={4} />
           <Grid item xs={4}>
-            <Grid container direction="row" justifyContent="center">
-              {links.map((item) =>
-                <InternalLink key={item.order} type={item.type} url={item.url} description={item.description} />
-              )}
-            </Grid>
+            <FooterWrapper items={links}>
+              <InternalLink />
+            </FooterWrapper>
           </Grid>
           <Grid item xs={4} />
         </Grid>
@@ -102,6 +107,8 @@ function Footer() {
 }
 
 function InternalLink(props) {
+  const classes = useStyles();
+
   let history = useHistory();
 
   const goTo = () => {
@@ -113,13 +120,12 @@ function InternalLink(props) {
   }
 
   return (
-    <Grid item xs>
+    <Box px={1}>
       <Link onClick={goTo} color="secondary">
         {props.description}
       </Link>
-    </Grid>
+    </Box>
   )
-
 }
 
 export default Footer;

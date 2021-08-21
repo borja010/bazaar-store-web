@@ -17,14 +17,6 @@ const Transition = forwardRef(function Transition(props, ref) {
 });
 
 const useStyles = makeStyles((theme) => ({
-    ul: {
-        listStyleType: "none",
-        padding: 0,
-        margin: 0,
-        overflow: "hidden",
-        display: "flex",
-        justifyContent: "center"
-    },
     imageWrapper: {
         borderRadius: "34px",
         width: "34px",
@@ -42,25 +34,8 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+
 function SocialNetworkLogo(props) {
-    const classes = useStyles();
-
-    let items = props.images.sort((a, b) => { return a.order - b.order });
-
-    return (
-        <Box py={1} alignContent="center">
-            <ul className={classes.ul}>
-                {items.map((item) =>
-                    <li key={item.order}>
-                        <Item img={item.img} backgroundColor={item.backgroundColor} url={item.url} />
-                    </li>
-                )}
-            </ul>
-        </Box>
-    );
-}
-
-function Item(props) {
 
     const [open, setOpen] = useState(false);
 
