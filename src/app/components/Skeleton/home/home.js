@@ -27,6 +27,7 @@ function Home() {
                     <CarouselWrapper items={items} />
                 </Grid>
             </Grid>
+            
         </Grid>
     );
 }

@@ -1,13 +1,12 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 
 import { useHistory } from "react-router-dom";
 
 import Box from "@material-ui/core/Box";
-import Grid from "@material-ui/core/Grid";
 import Link from '@material-ui/core/Link';
+import Typography from '@material-ui/core/Typography';
 
-import { makeStyles } from "@material-ui/core/styles";
-
+import { Context } from "app/context/store";
 import SocialNetworkNetwork from "app/components/Skeleton/socialNetwork/socialNetworkLogo";
 import FooterWrapper from "app/components/Skeleton/footerWrapper/footerWrapper";
 
@@ -17,18 +16,9 @@ import instagram from "app/assets/images/social-networks/instagram.png"
 import twitter from "app/assets/images/social-networks/twitter.png"
 import youtube from "app/assets/images/social-networks/youtube.png"
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: theme.palette.primary.main,
-    width: "100%"
-  },
-  ul: {
-
-  }
-}));
 
 function Footer() {
-  const classes = useStyles();
+  const [state] = useContext(Context);
 
   const images = [
     {
@@ -82,33 +72,33 @@ function Footer() {
 
   return (
     <footer>
-      <Grid container className={classes.root}>
-        <Grid container direction="row" justifyContent="center">
-          <Grid item xs={4} />
-          <Grid item xs={4}>
-            <FooterWrapper items={images}>
-              <SocialNetworkNetwork />
-            </FooterWrapper>
-          </Grid>
-          <Grid item xs={4} />
-        </Grid>
-        <Grid container direction="row" justifyContent="center">
-          <Grid item xs={4} />
-          <Grid item xs={4}>
-            <FooterWrapper items={links}>
-              <InternalLink />
-            </FooterWrapper>
-          </Grid>
-          <Grid item xs={4} />
-        </Grid>
-      </Grid>
+      <Box py={2} bgcolor="primary.main">
+        <Box textAlign="center">
+          <Typography variant="button" color="secondary">
+            {state.title}
+          </Typography>
+        </Box>
+        <Box textAlign="center">
+          <FooterWrapper items={images}>
+            <SocialNetworkNetwork />
+          </FooterWrapper>
+        </Box>
+        <Box textAlign="center">
+          <FooterWrapper items={links}>
+            <InternalLink />
+          </FooterWrapper>
+        </Box>
+        <Box textAlign="center" pt={{ xs: 2, sm: 4 }} pb={{ xs: 5, sm: 0 }}>
+          <Typography variant="caption" color="secondary">
+            © 2021 Francisco Tobar
+          </Typography>
+        </Box>
+      </Box>
     </footer>
   );
 }
 
 function InternalLink(props) {
-  const classes = useStyles();
-
   let history = useHistory();
 
   const goTo = () => {
@@ -121,7 +111,7 @@ function InternalLink(props) {
 
   return (
     <Box px={1}>
-      <Link onClick={goTo} color="secondary">
+      <Link onClick={goTo} color="secondary" href="">
         {props.description}
       </Link>
     </Box>
