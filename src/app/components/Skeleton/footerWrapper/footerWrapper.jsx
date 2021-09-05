@@ -21,7 +21,7 @@ function FooterWrapper(props) {
     let items = props.items.sort((a, b) => { return a.order - b.order });
 
     return (
-        <Box py={1} alignContent="center">
+        <Box py={1}>
             <ul className={classes.ul}>
                 {items.map((item) =>
                     <li key={item.order}>
