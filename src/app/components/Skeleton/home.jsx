@@ -5,8 +5,8 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
-import CarouselWrapper from "app/components/Skeleton/carouselWrapper/carouselWrapper";
-import CategoriesWrapper from "app/components/Skeleton/categoriesWrapper/categoriesWrapper";
+import CarouselWrapper from "app/components/Skeleton/carouselWrapper";
+import CategoriesWrapper from "app/components/Skeleton/categoriesWrapper";
 
 import { makeStyles } from "@material-ui/core/styles";
 

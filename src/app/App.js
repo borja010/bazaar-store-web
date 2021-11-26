@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import Main from "app/main";
-import Header from "app/components/Skeleton/header/header";
-import Footer from "app/components/Skeleton/footer/footer";
+import Header from "app/components/Skeleton/header";
+import Footer from "app/components/Skeleton/footer";
 import LoaderContext from "app/context/loaderContext";
 import Loader from "app/components/Skeleton/loader/loader";
 import "./App.scss";
-import Store from "app/context/store";
+import Store from "app/context/storeContext";
 
 
 function App() {

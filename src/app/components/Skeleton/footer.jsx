@@ -6,9 +6,9 @@ import Box from "@material-ui/core/Box";
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 
-import { Context } from "app/context/store";
-import SocialNetworkNetwork from "app/components/Skeleton/socialNetwork/socialNetworkLogo";
-import FooterWrapper from "app/components/Skeleton/footerWrapper/footerWrapper";
+import { Context } from "app/context/storeContext";
+import SocialNetworkNetwork from "app/components/Skeleton/socialNetworkLogo";
+import FooterWrapper from "app/components/Skeleton/footerWrapper";
 
 import facebook from "app/assets/images/social-networks/facebook.png"
 import whatsapp from "app/assets/images/social-networks/whatsapp.png"
