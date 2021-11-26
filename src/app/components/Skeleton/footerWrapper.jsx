@@ -1,8 +1,8 @@
 import React, { Children, cloneElement } from "react";
 
-import Box from "@material-ui/core/Box";
+import Box from "@mui/material/Box";
 
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
     ul: {

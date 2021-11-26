@@ -2,9 +2,9 @@ import React, { useContext } from "react";
 
 import { useHistory } from "react-router-dom";
 
-import Box from "@material-ui/core/Box";
-import Link from '@material-ui/core/Link';
-import Typography from '@material-ui/core/Typography';
+import Box from "@mui/material/Box";
+import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
 
 import { Context } from "app/context/storeContext";
 import SocialNetworkNetwork from "app/components/Skeleton/socialNetworkLogo";

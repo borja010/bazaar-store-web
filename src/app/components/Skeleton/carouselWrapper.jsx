@@ -1,6 +1,6 @@
 import React from "react";
 import Carousel from "react-material-ui-carousel";
-import Paper from "@material-ui/core/Paper";
+import Paper from "@mui/material/Paper";
 
 const CarouselWrapper = (props) => {
 

@@ -1,5 +1,5 @@
-import { indigo, cyan, red } from "@material-ui/core/colors";
-import { unstable_createMuiStrictModeTheme as createMuiTheme } from "@material-ui/core/styles";
+import { indigo, cyan, red } from "@mui/material/colors";
+import { unstable_createMuiStrictModeTheme as createMuiTheme } from "@mui/material/styles";
 
 // A custom theme for this app
 const theme = createMuiTheme({
