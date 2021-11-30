@@ -1,115 +1,159 @@
-import React from "react";
+import { React, useState } from "react";
+
+import ItemThumbnails from "./itemThumbnails";
 
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+
+import IconButton from '@mui/material/IconButton';
+
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import { useParams } from "react-router-dom";
 
 import { makeStyles } from "@mui/styles";
 
+import ItemDescription from "app/components/Store/itemDescription";
+import ItemOrder from "app/components/Store/itemOrder";
+
 const useStyles = makeStyles((theme) => ({
-    imageList: {
-        flexWrap: 'nowrap',
-        // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-        transform: 'translateZ(0)',
+    imageWrapper: {
+        height: "500px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
     },
-    selectedImage: {
-        width: "100%"
-    },
-    imageListItem: {
-        cursor: "pointer"
+    image: {
+        maxWidth: "100%",
+        maxHeight: "100%"
     }
 }));
 
 function Item() {
-    let { id } = useParams();
-
-    const classes = useStyles();
 
     let item = {
         name: "Random Name #1",
         description: "Probably the most random thing you have ever seen!",
-        height: "400",
+        price: "200",
+        currency: "Q",
         url: "",
+        stock: 20,
+        rating: 4.5,
         imgs: [
             {
                 title: "uno",
-                img: "https://drive.google.com/uc?export=view&id=1uJkL3dYI4SZV6WOf3KP4BzxfMP8DkOiS",
+                img: "https://drive.google.com/uc?export=view&id=1QhU0hmS5p-u2FmtmOr1fLC2lDrlPfzjZ",
                 url: ""
             },
             {
                 title: "dos",
-                img: "https://drive.google.com/uc?export=view&id=1uJkL3dYI4SZV6WOf3KP4BzxfMP8DkOiS",
+                img: "https://drive.google.com/uc?export=view&id=1MSHi-tIgLAa9fNzoXZq3kVD_jC_gGwfy",
                 url: ""
             },
             {
                 title: "tres",
-                img: "https://drive.google.com/uc?export=view&id=1uJkL3dYI4SZV6WOf3KP4BzxfMP8DkOiS",
+                img: "https://drive.google.com/uc?export=view&id=1L5IVQOLW4IkVMLOrytd1RVFjIAWKNytO",
                 url: ""
             },
             {
                 title: "cuatro",
+                img: "https://drive.google.com/uc?export=view&id=1jjMC5ChrKNzq5kpZie7v95Xeo6qN0zTr",
+                url: ""
+            },
+            {
+                title: "cinco",
+                img: "https://drive.google.com/uc?export=view&id=1ApScDvxLdr4fmDdk3aEKcIeQePnDnc3M",
+                url: ""
+            },
+            {
+                title: "seis",
+                img: "https://drive.google.com/uc?export=view&id=1MIHcMERyE5AlhiI0IFsOnj0Sl8-4gN4Q",
+                url: ""
+            },
+            {
+                title: "siete",
                 img: "https://drive.google.com/uc?export=view&id=1uJkL3dYI4SZV6WOf3KP4BzxfMP8DkOiS",
                 url: ""
-            }
+            },
+
         ]
     };
 
-    let selectedImage = item.imgs[0];
+    let { id } = useParams();
+
+    const classes = useStyles();
+
+    const [cursor, setCursor] = useState(0);
+
+    const [image, setImage] = useState(item.imgs[0]);
+
+    function moveRight() {
+        let temp = cursor + 1;
+        setCursor(temp);
+        setImage(item.imgs[temp]);
+    }
+
+    function moveLeft() {
+        let temp = cursor - 1;
+        setCursor(temp);
+        setImage(item.imgs[temp]);
+    }
+
+    function setNewImage(newImage) {
+        setImage(newImage);
+    }
 
     return (
         <Grid container>
             <Grid container direction="row" justifyContent="center">
-                <Grid item xs={12} md={3}>
+                <Grid item xs={12} md={4}>
                     <Grid container direction="row" justifyContent="center">
-                        <Grid item xs={12} md={12}>
+                        <Grid item xs={12}>
                             <Box>
-                                <img className={classes.selectedImage} src={selectedImage.img} />
+                                <Grid container direction="row" justifyContent="center" alignItems="center">
+                                    <Grid item xs={1}>
+                                        <IconButton
+                                            color="primary"
+                                            aria-label="Left selection"
+                                            component="span"
+                                            disabled={cursor === 0}
+                                            size="large"
+                                            onClick={moveLeft}
+                                        >
+                                            <ArrowBackIosIcon />
+                                        </IconButton>
+                                    </Grid>
+                                    <Grid item xs={10}>
+                                        <Box className={classes.imageWrapper}>
+                                            <img className={classes.image} src={image.img} />
+                                        </Box>
+                                    </Grid>
+                                    <Grid item xs={1}>
+                                        <IconButton
+                                            color="primary"
+                                            aria-label="Right selection"
+                                            component="span"
+                                            disabled={cursor === item.imgs.length - 1}
+                                            size="large"
+                                            onClick={moveRight}
+                                        >
+                                            <ArrowForwardIosIcon />
+                                        </IconButton>
+                                    </Grid>
+                                </Grid>
                             </Box>
                         </Grid>
-                        <Grid item xs={12} md={12}>
-                            <ImageList className={classes.imageList} cols={2.5}>
-                                {item.imgs.map((item) => (
-                                    <ImageListItem key={item.title} className={classes.imageListItem}>
-                                        <img src={item.img} alt={item.title} />
-                                    </ImageListItem>
-                                ))}
-                            </ImageList>
+                        <Grid item xs={12}>
+                            <ItemThumbnails item={item} selectImage={setNewImage} />
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid item xs={12} md={6}>
-                    <Card className={classes.root} variant="outlined">
-                        <CardContent>
-                            <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                Word of the Day
-                            </Typography>
-                            <Typography variant="h5" component="h2">
-                              
-                            </Typography>
-                            <Typography className={classes.pos} color="textSecondary">
-                                adjective
-                            </Typography>
-                            <Typography variant="body2" component="p">
-                                well meaning and kindly.
-                                <br />
-                                {'"a benevolent smile"'}
-                            </Typography>
-                        </CardContent>
-                        <CardActions>
-                            <Button size="small">Learn More</Button>
-                        </CardActions>
-                    </Card>
+                <Grid item xs={12} md={4}>
+                    <ItemDescription item={item} />
                 </Grid>
-                <Grid item xs={12} md={3}>
-
+                <Grid item xs={12} md={4}>
+                    <ItemOrder item={item} />
                 </Grid>
             </Grid>
         </Grid>

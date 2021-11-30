@@ -2,22 +2,29 @@ import React from "react";
 
 import Grid from "@mui/material/Grid";
 import Card from '@mui/material/Card';
+import { CardHeader } from '@mui/material';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-import ListSubheader from '@mui/material/ListSubheader';
 
 import { makeStyles } from "@mui/styles";
 
-const useStyles = makeStyles((theme) => ({
-    imageList:{
-        overflowY: "unset"
-    },
+const useStyles = makeStyles(() => ({
     cardContainer: {
         height: "100%",
         padding: "5px"
     },
     card: {
         width: "100%"
+    },
+    imageList: {
+        overflowY: "unset",
+        height: "300px",
+        width: "300px"
+    },
+    image: {
+        width: "100% !important",
+        height: "100% !important",
+        objectFit: "contain !important"
     }
 }));
 
@@ -44,17 +51,17 @@ function CategoriesWrapper() {
             imgs: [
                 {
                     title: "uno",
-                    img: "https://drive.google.com/uc?export=view&id=1uJkL3dYI4SZV6WOf3KP4BzxfMP8DkOiS",
+                    img: "https://drive.google.com/uc?export=view&id=1QhU0hmS5p-u2FmtmOr1fLC2lDrlPfzjZ",
                     url: ""
                 },
                 {
                     title: "dos",
-                    img: "https://drive.google.com/uc?export=view&id=1uJkL3dYI4SZV6WOf3KP4BzxfMP8DkOiS",
+                    img: "https://drive.google.com/uc?export=view&id=1MSHi-tIgLAa9fNzoXZq3kVD_jC_gGwfy",
                     url: ""
                 },
                 {
                     title: "tres",
-                    img: "https://drive.google.com/uc?export=view&id=1uJkL3dYI4SZV6WOf3KP4BzxfMP8DkOiS",
+                    img: "https://drive.google.com/uc?export=view&id=1L5IVQOLW4IkVMLOrytd1RVFjIAWKNytO",
                     url: ""
                 }
             ],
@@ -64,22 +71,22 @@ function CategoriesWrapper() {
             description: "",
             imgs: [
                 {
-                    title: "uno",
-                    img: "https://drive.google.com/uc?export=view&id=1uJkL3dYI4SZV6WOf3KP4BzxfMP8DkOiS",
-                    url: ""
-                },
-                {
-                    title: "dos",
-                    img: "https://drive.google.com/uc?export=view&id=1uJkL3dYI4SZV6WOf3KP4BzxfMP8DkOiS",
-                    url: ""
-                },
-                {
-                    title: "tres",
-                    img: "https://drive.google.com/uc?export=view&id=1uJkL3dYI4SZV6WOf3KP4BzxfMP8DkOiS",
-                    url: ""
-                },
-                {
                     title: "cuatro",
+                    img: "https://drive.google.com/uc?export=view&id=1jjMC5ChrKNzq5kpZie7v95Xeo6qN0zTr",
+                    url: ""
+                },
+                {
+                    title: "cinco",
+                    img: "https://drive.google.com/uc?export=view&id=1ApScDvxLdr4fmDdk3aEKcIeQePnDnc3M",
+                    url: ""
+                },
+                {
+                    title: "seis",
+                    img: "https://drive.google.com/uc?export=view&id=1MIHcMERyE5AlhiI0IFsOnj0Sl8-4gN4Q",
+                    url: ""
+                },
+                {
+                    title: "siete",
                     img: "https://drive.google.com/uc?export=view&id=1uJkL3dYI4SZV6WOf3KP4BzxfMP8DkOiS",
                     url: ""
                 }
@@ -140,19 +147,27 @@ function Categories(props) {
             rows = [1, 1, 1];
             cols = [1, 1, 2];
             break;
+        case 4:
+            rows = [1, 1, 1, 1];
+            cols = [1, 1, 1, 1];
+            break;
         default:
 
     }
 
     return (
         <Card variant="outlined">
-            <ImageList className={classes.imageList} rowHeight={100}>
-                <ImageListItem key="Subheader" cols={2} style={{ height: 'auto' }}>
-                    <ListSubheader component="div">{props.title}</ListSubheader>
-                </ImageListItem>
+            <CardHeader
+                subheader={props.title}
+            />
+            <ImageList className={classes.imageList} rowHeight={150}>
                 {imgs.map((item, index) => (
-                    <ImageListItem key={item.title} cols={cols[index] | 1} rows={rows[index] | 1}>
-                        <img src={item.img} alt={item.title} />
+                    <ImageListItem className={classes.imageListItem} key={item.title} cols={cols[index]} rows={rows[index]}>
+                        <img
+                            className={classes.image}
+                            src={item.img}
+                            alt={item.title}
+                            loading="lazy" />
                     </ImageListItem>
                 ))}
             </ImageList>
