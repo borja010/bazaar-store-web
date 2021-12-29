@@ -20,7 +20,7 @@ function ItemOrder(props) {
     };
 
     return (
-        <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }} mt={2}>
+        <Box sx={{ width: '100%', bgcolor: 'background.paper' }} mt={2}>
             <Grid container direction="column" alignItems="center">
                 <Grid item xs>
                     <Stack direction="row" spacing={1}>
