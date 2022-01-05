@@ -23,17 +23,12 @@ import { Context } from "app/context/storeContext";
 const menu = ["Página principal", "Contacto", "Productos"];
 
 const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   '&:hover': {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(1),
-    width: 'auto',
-  },
+  margin: "auto"
 }));
 
 function Header() {
@@ -43,27 +38,39 @@ function Header() {
   return (
     <AppBar position="static">
       <Toolbar>
-        <IconButton edge="start" color="inherit" aria-label="menu" onClick={() => setOpen(true)}>
-          <MenuIcon />
-          <Typography variant="h6">
-            {state.title}
-          </Typography>
-        </IconButton>
         <Grid container direction="row" justifyContent="space-between">
-        <Grid item xs={4}></Grid>
-          <Grid item xs={4}>
-            <Search>
-              <InputBase
-                sx={{ ml: 1, color: "white" }}
-                placeholder="Buscar"
-                inputProps={{ 'aria-label': 'buscar' }}
-              />
-              <IconButton color="inherit" type="submit" sx={{ p: "10px" }} aria-label="search">
-                <SearchIcon />
-              </IconButton>
+          <Grid item>
+            <IconButton edge="start" color="inherit" aria-label="menu" onClick={() => setOpen(true)}>
+              <MenuIcon />
+              <Typography variant="h6">
+                {state.title}
+              </Typography>
+            </IconButton>
+          </Grid>
+          <Grid item xs={12} md={8} order={{ md: 1, xs: 2 }} sx={{ padding: { xs: 1, md: 0 } }}>
+            <Search sx={{ width: { xs: "100%", md: "60%" } }}>
+              <Grid container direction="row" justifyContent="space-between" alignItems="center">
+                <Grid item xs={6} sx={{ flexBasis: "auto" }}>
+                  <InputBase
+                    sx={{ ml: 1, color: "inherit" }}
+                    placeholder="Buscar"
+                    inputProps={{ 'aria-label': 'buscar' }}
+                  />
+                </Grid>
+                <Grid item xs={6} sx={{ flexBasis: "auto" }}>
+                  <IconButton
+                    color="inherit"
+                    aria-label="search"
+                    component="span"
+
+                  >
+                    <SearchIcon />
+                  </IconButton>
+                </Grid>
+              </Grid>
             </Search>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={4} order={{ md: 2, xs: 1 }} sx={{ flexBasis: "auto" }}>
             <IconButton color="inherit" aria-label="cart" onClick={() => setOpen(true)}>
               <AccountCircleIcon />
             </IconButton>
