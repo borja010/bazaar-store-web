@@ -1,5 +1,7 @@
 import { React, useRef, useState, useEffect } from "react";
-
+import Backdrop from '@mui/material/Backdrop';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 import { makeStyles } from "@mui/styles"
 
@@ -12,10 +14,8 @@ const useStyles = makeStyles((theme) => ({
     slides: {
         display: "flex",
         overflowX: "auto",
-        //  scrollSnapType: "x mandatory",
-        // scrollBehavior: "smooth",
-        backgroundColor: "transparent",
-        touchAction: "pinch-zoom"
+        backgroundColor: "gray",
+        touchAction: "none"
     },
     slide: {
         scrollSnapAlign: "start",
@@ -28,12 +28,12 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center"
     },
     imageSlide: {
-        //objectFit: "contain",
         position: "absolute",
         top: 0,
         left: 0,
         width: "100%",
-        height: "95%"
+        height: "95%",
+        transition: "all  0.5s ease-out"
     }
 }));
 
@@ -44,12 +44,14 @@ function getWindowDimensions() {
 
 function SmallGallery(props) {
 
+    const [item, setItem] = useState(null);
+
+
     const slider = useRef(null);
 
     const classes = useStyles();
 
     const windowDimensions = getWindowDimensions();
-
 
     useEffect(() => {
         let current = slider.current;
@@ -59,8 +61,8 @@ function SmallGallery(props) {
     }, [])
 
     const [offset, setOffset] = useState(0);
-    const [touchStart, setTouchStart] = useState(0);
-    const [touchEnd, setTouchEnd] = useState(0);
+    const [touchStart, setTouchStart] = useState(-1);
+    const [touchEnd, setTouchEnd] = useState(-1);
     const [initialScroll, setInitialScroll] = useState(0);
 
     function handleTouchStart(e) {
@@ -76,20 +78,57 @@ function SmallGallery(props) {
         current.scrollLeft = initialScroll - diff;
     }
 
+    function easeInOutQuad(t) { return t < .5 ? 2 * t * t : -1 + (4 - 2 * t) * t }
+
     function handleTouchEnd() {
         let current = slider.current;
         const diff = touchEnd - touchStart;
         const percentage = diff / windowDimensions.width;
-        if (percentage > 0.6 && initialScroll > offset) {
-            let previous = parseInt(initialScroll / (windowDimensions.width + offset)) - 1;
-            current.scrollLeft = previous * (windowDimensions.width + offset) + offset / 2;
-        } else if (percentage < -0.6 && current.scrollWidth - current.scrollLeft - windowDimensions.width > offset) {
-            let next = parseInt(initialScroll / (windowDimensions.width + offset)) + 1;
-            current.scrollLeft = next * (windowDimensions.width + offset) + offset / 2;
+        const movement = touchStart != -1 && touchEnd != -1;
+        const sign = Math.sign(diff);
+        if (sign > 0) {
+            if (movement && percentage > 0.4 && initialScroll > offset) {
+                let previous = parseInt(initialScroll / (windowDimensions.width + offset)) - 1;
+                let end = previous * (windowDimensions.width + offset) + offset / 2;
+                moveIt(current, end, -25);
+            } else {
+                moveIt(current, initialScroll, 25);
+            }
+        } else if (sign < 0) {
+            if (movement && percentage < -0.4 && current.scrollWidth - current.scrollLeft - windowDimensions.width > offset) {
+                let next = parseInt(initialScroll / (windowDimensions.width + offset)) + 1;
+                let end = next * (windowDimensions.width + offset) + offset / 2;
+                moveIt(current, end, 25);
+            } else {
+                moveIt(current, initialScroll, -25);
+            }
+        }
+    }
+
+    function moveIt(current, end, speed) {
+        var requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame;
+        let sign = Math.sign(speed);
+        current.scrollLeft = current.scrollLeft + speed;
+        if (sign > 0 && current.scrollLeft < end) {
+            requestAnimationFrame(function (timestamp) {
+                moveIt(current, end, speed);
+            })
+        } else if (sign < 0 && current.scrollLeft > end) {
+            requestAnimationFrame(function (timestamp) {
+                moveIt(current, end, speed);
+            })
         } else {
-            current.scrollLeft = initialScroll;
+            current.scrollLeft = end;
         }
 
+    }
+
+    function openItem(item) {
+        setItem(item);
+    }
+
+    function closeItem() {
+        setItem(null);
     }
 
     return (
@@ -108,16 +147,57 @@ function SmallGallery(props) {
                         onTouchMove={handleTouchMove}
                         onTouchEnd={handleTouchEnd}
                     >
-                        <img
-                            className={classes.imageSlide}
-                            src={item.img}
+                        <ImageGallery
+                            item={item}
+                            openItem={openItem}
                         />
                     </figure>
                 ))}
             </div>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={item != null}
+            >
+                <IconButton
+                    aria-label="close"
+                    size="large"
+                    sx={{
+                        position: "absolute",
+                        right: 8,
+                        top: 8,
+                        color: "white"
+                    }}
+                    onClick={closeItem}
+                >
+                    <CloseIcon />
+                </IconButton>
+                {item &&
+                    <img
+                        src={item.img}
+                    />
+                }
+            </Backdrop>
         </div>
     );
 
+}
+
+
+function ImageGallery(props) {
+
+    const classes = useStyles();
+
+    function openItem() {
+        props.openItem(props.item);
+    }
+
+    return (
+        <img
+            className={classes.imageSlide}
+            src={props.item.img}
+            onClick={openItem}
+        />
+    )
 }
 
 export default SmallGallery;
