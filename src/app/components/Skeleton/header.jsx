@@ -47,13 +47,14 @@ const Search = styled('div')(({ theme }) => ({
 }));
 
 function Header() {
+
   const [clickCount, setClickCount] = useState(0);
   const [open, setOpen] = useState(false);
   const [state] = useContext(Context);
   const [anchorEl, setAnchorEl] = useState(null);
   const [accountOpen, setAccountOpen] = useState(false);
 
-  function stringToColor(string) {
+  const stringToColor = (string) => {
     let hash = 0;
     let i;
 
@@ -73,7 +74,7 @@ function Header() {
     return color;
   }
 
-  function stringAvatar(name) {
+  const stringAvatar = (name) => {
     return {
       sx: {
         bgcolor: stringToColor(name),
@@ -85,24 +86,24 @@ function Header() {
     };
   }
 
-  function handleOpen(event) {
+  const handleOpen = (e) => {
     setAccountOpen(true);
-    setAnchorEl(event.currentTarget);
+    setAnchorEl(e.currentTarget);
   };
 
 
-  function handleClose() {
+  const handleClose = () => {
     setAccountOpen(false);
     setAnchorEl(null);
   }
 
-  function handleClick(event) {
+  const handleClick = (e) => {
     if (accountOpen && clickCount === 1) {
       setClickCount(clickCount - 1);
       handleClose();
     } else if (clickCount === 0) {
       setClickCount(clickCount + 1);
-      handleOpen(event);
+      handleOpen(e);
     }
   }
 

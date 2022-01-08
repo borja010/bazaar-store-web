@@ -128,22 +128,22 @@ function ItemStore() {
     const [showMagnifier, setShowMagnifier] = useState(false)
     const [[top, width, height], setArea] = useState([0, 0, 0]);
 
-    function setNewImage(newImage) {
+    const setNewImage = (newImage) => {
         setImage(newImage);
     }
 
-    function handleMouseEnter(e) {
+    const handleMouseEnter = (e) => {
         setShowMagnifier(true);
         const elem = e.currentTarget;
         const { top, width, height } = elem.getBoundingClientRect();
         setArea([top + window.pageYOffset, width, height]);
     }
 
-    function handleMouseLeave() {
+    const handleMouseLeave = () => {
         setShowMagnifier(false);
     }
 
-    function handleMouseMove(e) {
+    const handleMouseMove = (e) => {
         var posX = e.pageX;
         var posY = e.pageY;
         const elem = e.currentTarget;

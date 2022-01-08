@@ -51,27 +51,27 @@ function ItemThumbnails(props) {
 
     const classes = useStyles();
 
-    function leftScroll() {
+    const leftScroll = () => {
         let current = element.current;
         current.scrollLeft -= distance;
         setScroll(parseInt(current.scrollLeft));
     }
 
-    function rightScroll() {
+    const rightScroll = () => {
         let current = element.current;
         current.scrollLeft += distance;
         setScroll(parseInt(current.scrollLeft));
     }
 
-    function selectImage(image) {
+    const selectImage = (image) => {
         props.selectImage(image);
     }
 
-    function handleTouchStart(e) {
+    const handleTouchStart = (e) => {
         setTouchStart(e.targetTouches[0].clientX);
     }
 
-    function handleTouchMove(e) {
+    const handleTouchMove = (e) => {
         let diff = (touchStart - e.targetTouches[0].clientX) / 5;
         let current = element.current;
         current.scrollLeft += diff;

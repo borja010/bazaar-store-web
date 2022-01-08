@@ -65,22 +65,20 @@ function SmallGallery(props) {
     const [touchEnd, setTouchEnd] = useState(-1);
     const [initialScroll, setInitialScroll] = useState(0);
 
-    function handleTouchStart(e) {
+    const handleTouchStart = (e) => {
         let current = slider.current;
         setInitialScroll(current.scrollLeft);
         setTouchStart(e.targetTouches[0].clientX);
     }
 
-    function handleTouchMove(e) {
+    const handleTouchMove = (e) => {
         let current = slider.current;
         let diff = e.targetTouches[0].clientX - touchStart;
         setTouchEnd(e.targetTouches[0].clientX);
         current.scrollLeft = initialScroll - diff;
     }
 
-    function easeInOutQuad(t) { return t < .5 ? 2 * t * t : -1 + (4 - 2 * t) * t }
-
-    function handleTouchEnd() {
+    const handleTouchEnd = () => {
         let current = slider.current;
         const diff = touchEnd - touchStart;
         const percentage = diff / windowDimensions.width;
@@ -105,7 +103,7 @@ function SmallGallery(props) {
         }
     }
 
-    function moveIt(current, end, speed) {
+    const moveIt = (current, end, speed) => {
         var requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame;
         let sign = Math.sign(speed);
         current.scrollLeft = current.scrollLeft + speed;
@@ -123,11 +121,11 @@ function SmallGallery(props) {
 
     }
 
-    function openItem(item) {
+    const openItem = (item) => {
         setItem(item);
     }
 
-    function closeItem() {
+    const closeItem = () => {
         setItem(null);
     }
 

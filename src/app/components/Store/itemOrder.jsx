@@ -11,12 +11,12 @@ import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 
-function ItemOrder(props) {
+function ItemOrder() {
 
     const [quantity, setQuantity] = useState(1);
 
-    const handleChange = (event) => {
-        setQuantity(event.target.value);
+    const handleChange = (e) => {
+        setQuantity(e.target.value);
     };
 
     return (

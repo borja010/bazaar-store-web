@@ -18,6 +18,7 @@ import youtube from "app/assets/images/social-networks/youtube.png"
 
 
 function Footer() {
+  
   const [state] = useContext(Context);
 
   const images = [
