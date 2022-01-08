@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function Item() {
+function ItemStore() {
 
     let item = {
         name: "Random Name #1",
@@ -248,4 +248,4 @@ function Item() {
     )
 }
 
-export default Item;
+export default ItemStore;
