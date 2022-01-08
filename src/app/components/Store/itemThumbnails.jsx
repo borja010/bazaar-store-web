@@ -34,7 +34,7 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-function ItemThumbnails(props) {
+function ItemThumbnails({ selectImage, item }) {
 
     const element = useRef(null);
 
@@ -63,8 +63,8 @@ function ItemThumbnails(props) {
         setScroll(parseInt(current.scrollLeft));
     }
 
-    const selectImage = (image) => {
-        props.selectImage(image);
+    const select = (image) => {
+        selectImage(image);
     }
 
     const handleTouchStart = (e) => {
@@ -99,7 +99,7 @@ function ItemThumbnails(props) {
                     onTouchStart={touchStartEvent => handleTouchStart(touchStartEvent)}
                     onTouchMove={touchMoveEvent => handleTouchMove(touchMoveEvent)}
                 >
-                    {props.item.imgs.map((item) => (
+                    {item.imgs.map((item) => (
                         <ListItem key={item.title} className={classes.listItem}>
                             <Card
                                 variant="outlined"
@@ -111,7 +111,7 @@ function ItemThumbnails(props) {
                                     component="img"
                                     src={item.img}
                                     alt={item.title}
-                                    onMouseEnter={() => selectImage(item)}
+                                    onMouseEnter={() => select(item)}
                                 />
                             </Card>
                         </ListItem>

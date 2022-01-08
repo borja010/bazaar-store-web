@@ -6,25 +6,25 @@ import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import Rating from '@mui/material/Rating';
 
-function ItemDescription(props) {
+function ItemDescription({ item }) {
 
     return (
-        <Box sx={{ width: '100%', bgcolor: 'background.paper'  }} mt={2}>
+        <Box sx={{ width: '100%', bgcolor: 'background.paper' }} mt={2}>
             <Box mb={2}>
                 <Grid container direction="column" alignItems="center">
                     <Grid item xs>
                         <Typography gutterBottom variant="h4" component="div">
-                            {props.item.name}
+                            {item.name}
                         </Typography>
                     </Grid>
                     <Grid item xs>
                         <Typography color="text.secondary" variant="body2">
-                            {props.item.description}
+                            {item.description}
                         </Typography>
                     </Grid>
                     <Grid item xs>
                         <Typography color="text.secondary" variant="body2">
-                            <Rating name="read-only" value={props.item.rating} precision={0.5} readOnly />    (5 valoraciones)
+                            <Rating name="read-only" value={item.rating} precision={0.5} readOnly />    (5 valoraciones)
                         </Typography>
                     </Grid>
                 </Grid>
@@ -32,7 +32,7 @@ function ItemDescription(props) {
             <Divider variant="middle" />
             <Box my={2}>
                 <Typography color="text.secondary" variant="h6">
-                    Precio: {props.item.currency} {props.item.price}
+                    Precio: {item.currency} {item.price}
                 </Typography>
             </Box>
         </Box>

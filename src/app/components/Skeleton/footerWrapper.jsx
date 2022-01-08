@@ -15,17 +15,17 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function FooterWrapper(props) {
+function FooterWrapper({items, children}) {
     const classes = useStyles();
 
-    let items = props.items.sort((a, b) => { return a.order - b.order });
+    let auxItems = items.sort((a, b) => { return a.order - b.order });
 
     return (
         <Box py={1}>
             <ul className={classes.ul}>
-                {items.map((item) =>
+                {auxItems.map((item) =>
                     <li key={item.order}>
-                        {Children.map(props.children,
+                        {Children.map(children,
                             child => {
                                 return cloneElement(child, {...item});
                             })}

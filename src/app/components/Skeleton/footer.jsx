@@ -18,7 +18,7 @@ import youtube from "app/assets/images/social-networks/youtube.png"
 
 
 function Footer() {
-  
+
   const [state] = useContext(Context);
 
   const images = [
@@ -99,21 +99,21 @@ function Footer() {
   );
 }
 
-function InternalLink(props) {
+function InternalLink({ type, url, description }) {
   let history = useHistory();
 
   const goTo = () => {
-    if (props.type === "internal") {
-      history.push(props.url);
+    if (type === "internal") {
+      history.push(url);
     } else {
-      window.open(props.url);
+      window.open(url);
     }
   }
 
   return (
     <Box px={1}>
       <Link onClick={goTo} color="secondary" href="">
-        {props.description}
+        {description}
       </Link>
     </Box>
   )

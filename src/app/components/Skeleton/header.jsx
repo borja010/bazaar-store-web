@@ -209,16 +209,16 @@ function Header() {
   );
 }
 
-function AccountMenu(props) {
+function AccountMenu({ anchorEl, open }) {
 
-  const id = props.open ? 'transition-popper' : undefined;
+  const id = open ? 'transition-popper' : undefined;
 
   return (
     <Popper
       id={id}
       autoFocus
-      open={props.open}
-      anchorEl={props.anchorEl}
+      open={open}
+      anchorEl={anchorEl}
       style={{
         zIndex: 5
       }}

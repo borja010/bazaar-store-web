@@ -42,9 +42,9 @@ function getWindowDimensions() {
     return { width, height };
 }
 
-function SmallGallery(props) {
+function SmallGallery({ item }) {
 
-    const [item, setItem] = useState(null);
+    const [aux, setAux] = useState(null);
 
 
     const slider = useRef(null);
@@ -122,11 +122,11 @@ function SmallGallery(props) {
     }
 
     const openItem = (item) => {
-        setItem(item);
+        setAux(item);
     }
 
     const closeItem = () => {
-        setItem(null);
+        setAux(null);
     }
 
     return (
@@ -135,18 +135,18 @@ function SmallGallery(props) {
                 className={classes.slides}
                 ref={slider}
             >
-                {props.item.imgs.map((item) => (
+                {item.imgs.map((i) => (
                     <figure
                         className={classes.slide}
-                        key={item.title}
+                        key={i.title}
                         style={{ width: windowDimensions.width + "px" }}
-                        id={item.title}
+                        id={i.title}
                         onTouchStart={handleTouchStart}
                         onTouchMove={handleTouchMove}
                         onTouchEnd={handleTouchEnd}
                     >
                         <ImageGallery
-                            item={item}
+                            item={i}
                             openItem={openItem}
                         />
                     </figure>
@@ -154,7 +154,7 @@ function SmallGallery(props) {
             </div>
             <Backdrop
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                open={item != null}
+                open={aux != null}
             >
                 <IconButton
                     aria-label="close"
@@ -169,9 +169,9 @@ function SmallGallery(props) {
                 >
                     <CloseIcon />
                 </IconButton>
-                {item &&
+                {aux &&
                     <img
-                        src={item.img}
+                        src={aux.img}
                     />
                 }
             </Backdrop>
@@ -181,19 +181,19 @@ function SmallGallery(props) {
 }
 
 
-function ImageGallery(props) {
+function ImageGallery({ openItem, item }) {
 
     const classes = useStyles();
 
-    function openItem() {
-        props.openItem(props.item);
+    function open() {
+        openItem(item);
     }
 
     return (
         <img
             className={classes.imageSlide}
-            src={props.item.img}
-            onClick={openItem}
+            src={item.img}
+            onClick={open}
         />
     )
 }

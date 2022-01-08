@@ -2,21 +2,21 @@ import React from "react";
 import Carousel from "react-material-ui-carousel";
 import Paper from "@mui/material/Paper";
 
-const CarouselWrapper = (props) => {
+const CarouselWrapper = ({ items, interval }) => {
 
-    let height  = Math.max.apply(Math, props.items.map(x => x.height));
+    let height = Math.max.apply(Math, items.map(x => x.height));
 
     return (
-        <Carousel navButtonsAlwaysVisible={true} interval={props.interval || 3000}>
-            { props.items.map((item, i) => <Item key={i} item={item} height={height} />)}
+        <Carousel navButtonsAlwaysVisible={true} interval={interval || 3000}>
+            {items.map((item, i) => <Item key={i} item={item} height={height} />)}
         </Carousel>
     );
 };
 
-function Item(props) {
+function Item({ item, height }) {
     return (
         <Paper variant="outlined">
-            <img style={{maxHeight: props.height, minHeight: props.height}}  src={props.item.img} alt="Logo" />
+            <img style={{ maxHeight: height, minHeight: height }} src={item.img} alt="Logo" />
         </Paper>
     )
 }

@@ -35,15 +35,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function SocialNetworkLogo(props) {
+function SocialNetworkLogo({ url, backgroundColor, alt, img }) {
 
     const [open, setOpen] = useState(false);
 
     const classes = useStyles();
 
     const openUrl = () => {
-        if (props.url) {
-            window.open(props.url);
+        if (url) {
+            window.open(url);
         } else {
             setOpen(true);
         }
@@ -56,8 +56,8 @@ function SocialNetworkLogo(props) {
     return (
         <div>
             <Box px={1}>
-                <div className={classes.imageWrapper} style={{ backgroundColor: props.backgroundColor }} onClick={openUrl}>
-                    <img className={classes.img} src={props.img} alt={props.alt} />
+                <div className={classes.imageWrapper} style={{ backgroundColor: backgroundColor }} onClick={openUrl}>
+                    <img className={classes.img} src={img} alt={alt} />
                 </div>
             </Box>
 

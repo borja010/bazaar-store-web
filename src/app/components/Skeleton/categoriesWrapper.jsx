@@ -125,11 +125,9 @@ function CategoriesWrapper() {
 
 }
 
-function Categories(props) {
+function Categories({ imgs, title }) {
 
     const classes = useStyles();
-
-    let imgs = props.imgs;
     let length = imgs.length;
 
     let rows = [];
@@ -158,7 +156,7 @@ function Categories(props) {
     return (
         <Card variant="outlined">
             <CardHeader
-                subheader={props.title}
+                subheader={title}
             />
             <ImageList className={classes.imageList} rowHeight={150}>
                 {imgs.map((item, index) => (
